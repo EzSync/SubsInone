@@ -9,20 +9,35 @@ let SUBUpdateTime = 6; //自定义订阅更新时间，单位小时
 
 //自建节点
 const MainData = `
-vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.okcupid.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
-vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@time.is:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
-vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@malaysia.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
-vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.wto.org:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@104.16.61.119:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@104.16.81.251:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@achk.cloudflarest.link:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@cf.090227.xyz:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@cip.951535.xyz:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@fbi.gov:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@icook.tw:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
 vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@iplocation.io:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
-vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.iplocation.net:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@malaysia.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@sp.rweek.top:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@tg.ezbiz365.cloudns.org:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@time.is:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@whatismyipaddress.com:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
 vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.csgo.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.ipchicken.com:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.iplocation.net:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.okcupid.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.visa.com.hk:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.visa.com.sg:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.visa.com.tw:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.visakorea.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.whoer.net:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.wto.org:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
 `
 
 //机场信息，可多个，也可为0
 const urls = [
 	'https://3k.fxxk.dedyn.io/sub',
 	'https://sub.kaiche.tk/?token=auto',
-	'http://allsub.king361.cf',
 	'https://vless.fxxk.dedyn.io/auto',
 	// 添加更多订阅,支持base64
 ];
