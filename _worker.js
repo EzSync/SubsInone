@@ -1,7 +1,7 @@
 
 // 部署完成后在网址后面加上这个，获取自建节点和机场聚合节点，/?token=auto或/auto或
 
-let mytoken = 'auto'; //可以随便取，或者uuid生成，https://1024tools.com/uuid
+let mytoken = 'sxmzdsh'; //可以随便取，或者uuid生成，https://1024tools.com/uuid
 let BotToken =''; //可以为空，或者@BotFather中输入/start，/newbot，并关注机器人
 let ChatID =''; //可以为空，或者@userinfobot中获取，/start
 let TG = 0; //1 为推送所有的访问信息，0 为不推送订阅转换后端的访问信息与异常访问
@@ -9,11 +9,21 @@ let SUBUpdateTime = 6; //自定义订阅更新时间，单位小时
 
 //自建节点
 const MainData = `
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.okcupid.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@time.is:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@malaysia.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.wto.org:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@iplocation.io:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.iplocation.net:443?encryption=none&security=tls&sni=tg.ezbiz365.cloudns.org&fp=randomized&type=ws&host=tg.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#CFWP
+vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@www.csgo.com:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
 `
 
 //机场信息，可多个，也可为0
 const urls = [
-	'https://raw.githubusercontent.com/EzSync/test/main/CFEP.txt',
+	'https://3k.fxxk.dedyn.io/sub',
+	'https://sub.kaiche.tk/?token=auto',
+	'http://allsub.king361.cf',
+	'https://vless.fxxk.dedyn.io/auto',
 	// 添加更多订阅,支持base64
 ];
 
