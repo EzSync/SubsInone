@@ -39,6 +39,7 @@ const urls = [
 	'https://3k.fxxk.dedyn.io/sub',
 	'http://allsub.king361.cf',
 	'https://sub.kaiche.tk/?token=auto',
+	'https://vless.fxxk.dedyn.io/auto',
 	// 添加更多订阅,支持base64
 ];
 
