@@ -37,9 +37,8 @@ vless://dac89ddd-1a89-4732-88dd-105cfaaf5ab8@www.wto.org:443?encryption=none&sec
 //机场信息，可多个，也可为0
 const urls = [
 	'https://3k.fxxk.dedyn.io/sub',
-	'https://cm.git.cloudns.biz/CMLiu',
+	'http://allsub.king361.cf',
 	'https://sub.kaiche.tk/?token=auto',
-	'https://free.king361.cf/v2?ip=skk.moe&port=8443',
 	// 添加更多订阅,支持base64
 ];
 
