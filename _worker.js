@@ -1,13 +1,13 @@
 
 // 部署完成后在网址后面加上这个，获取自建节点和机场聚合节点，/?token=auto或/auto或
 
-let mytoken = 'sxmzdsh'; //可以随便取，或者uuid生成，https://1024tools.com/uuid
-let BotToken ='7141232491:AAFGd5RWYSKbaQfSJBRgEECbPD_a6-PoaaA'; //可以为空，或者@BotFather中输入/start，/newbot，并关注机器人
+let mytoken = 'auto'; //可以随便取，或者uuid生成，https://1024tools.com/uuid
+let BotToken =''; //可以为空，或者@BotFather中输入/start，/newbot，并关注机器人
 let ChatID =''; //可以为空，或者@userinfobot中获取，/start
-let TG = 1; //1 为推送所有的访问信息，0 为不推送订阅转换后端的访问信息与异常访问
+let TG = 0; //1 为推送所有的访问信息，0 为不推送订阅转换后端的访问信息与异常访问
 let SUBUpdateTime = 6; //自定义订阅更新时间，单位小时
 
-//自建节点
+//自建节点+机场订阅
 const MainData = `
 vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@104.16.61.119:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
 vless://3dd86e92-1aa7-4227-b5c8-af7470be5f36@104.16.81.251:443?encryption=none&security=tls&sni=esubcm.ezbiz.dynv6.net&fp=randomized&type=ws&host=esubcm.ezbiz.dynv6.net&path=%2F%3Fed%3D2048#CFEP
@@ -46,8 +46,8 @@ const urls = [
 	// 添加更多订阅,支持base64
 ];
 
-let subconverter = "api.v1.mk"; //在线订阅转换后端，目前使用肥羊的订阅转换功能。支持自建psub 可自行搭建https://github.com/bulianglin/psub
-let subconfig = "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/config/ACL4SSR_Online_Full.ini"; //订阅配置文件
+let subconverter = "apiurl.v1.mk"; //在线订阅转换后端，目前使用肥羊的订阅转换功能。支持自建psub 可自行搭建https://github.com/bulianglin/psub
+let subconfig = "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/config/ACL4SSR_Online_MultiCountry.ini"; //订阅配置文件
 
 export default {
 	async fetch (request,env) {
@@ -62,15 +62,67 @@ export default {
 		subconverter = env.SUBAPI || subconverter;
 		subconfig = env.SUBCONFIG || subconfig;
 
+		MainData = env.LINK || MainData;
+		if(env.LINKSUB) urls = await ADD(env.LINKSUB);
+
+		let links = await ADD(MainData + '\n' + urls.join('\n'));
+		let link ="";
+		let linksub = "";
+		
+		for (let x of links) {
+			if (x.toLowerCase().startsWith('http')) {
+				linksub += x + '\n';
+			} else {
+				link += x + '\n';
+			}
+		}
+		MainData = link;
+		urls = await ADD(linksub)
+		let sublinks = request.url ;
+		if(env.WARP) sublinks += '|' + (await ADD(env.WARP)).join('|');
+		//console.log(MainData,urls,sublinks);
+
 		if ( !(token == mytoken || url.pathname == ("/"+ mytoken) || url.pathname.includes("/"+ mytoken + "?")) ) {
 			if ( TG == 1 && url.pathname !== "/" && url.pathname !== "/favicon.ico" ) await sendMessage("#异常访问", request.headers.get('CF-Connecting-IP'), `UA: ${userAgent}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
-			return new Response('Hello World!', { status: 403 });
+			//首页改成一个nginx伪装页
+			return new Response(`
+			<!DOCTYPE html>
+			<html>
+			<head>
+			<title>Welcome to nginx!</title>
+			<style>
+				body {
+					width: 35em;
+					margin: 0 auto;
+					font-family: Tahoma, Verdana, Arial, sans-serif;
+				}
+			</style>
+			</head>
+			<body>
+			<h1>Welcome to nginx!</h1>
+			<p>If you see this page, the nginx web server is successfully installed and
+			working. Further configuration is required.</p>
+			
+			<p>For online documentation and support please refer to
+			<a href="http://nginx.org/">nginx.org</a>.<br/>
+			Commercial support is available at
+			<a href="http://nginx.com/">nginx.com</a>.</p>
+			
+			<p><em>Thank you for using nginx.</em></p>
+			</body>
+			</html>
+			`, {
+				headers: {
+					'Content-Type': 'text/html; charset=UTF-8',
+				},
+			});
 		} else if ( TG == 1 || !userAgent.includes('subconverter') || !userAgent.includes('null')){
-			await sendMessage("#获取订阅", request.headers.get('CF-Connecting-IP'), `UA: ${userAgent}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
+			await sendMessage("#获取订阅", request.headers.get('CF-Connecting-IP'), `UA: ${userAgentHeader}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
 		}
 
-		if (userAgent.includes('clash')) {
-			const subconverterUrl = `https://${subconverter}/sub?target=clash&url=${encodeURIComponent(request.url)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
+		if (userAgent.includes('clash') && !userAgent.includes('nekobox')) {
+			
+			const subconverterUrl = `https://${subconverter}/sub?target=clash&url=${encodeURIComponent(sublinks)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
 
 			try {
 				const subconverterResponse = await fetch(subconverterUrl);
@@ -94,7 +146,7 @@ export default {
 				});
 			}
 		} else if (userAgent.includes('sing-box') || userAgent.includes('singbox')) {
-			const subconverterUrl = `https://${subconverter}/sub?target=singbox&url=${encodeURIComponent(request.url)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
+			const subconverterUrl = `https://${subconverter}/sub?target=singbox&url=${encodeURIComponent(sublinks)}&insert=false&config=${encodeURIComponent(subconfig)}&emoji=true&list=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true`;
 
 			try {
 				const subconverterResponse = await fetch(subconverterUrl);
@@ -122,24 +174,24 @@ export default {
 			req_data += MainData;
 			
 			try {
-				const responses = await Promise.all(urls.map(url => fetch(url,{
-					method: 'get',
-					headers: {
-						'Accept': 'text/html,application/xhtml+xml,application/xml;',
-						'User-Agent': 'CF-Workers-SUB/cmliu'
-					}
-				})));
-					
+				const responses = await Promise.allSettled(urls.map(url =>
+					fetch(url, {
+						method: 'get',
+						headers: {
+							'Accept': 'text/html,application/xhtml+xml,application/xml;',
+							'User-Agent': 'v2rayN/6.39 cmliu/CF-Workers-SUB'
+						}
+					}).then(response => response.ok ? response.text() : Promise.reject())
+				));
+			
 				for (const response of responses) {
-					if (response.ok) {
-						const content = await response.text();
-						//console.log(content);
+					if (response.status === 'fulfilled') {
+						const content = await response.value;
 						req_data += base64Decode(content) + '\n';
-						//console.log(req_data);
 					}
 				}
 			} catch (error) {
-	
+				console.error(error);
 			}
 			//修复中文错误
 			const utf8Encoder = new TextEncoder();
@@ -191,4 +243,14 @@ function base64Decode(str) {
 	const bytes = new Uint8Array(atob(str).split('').map(c => c.charCodeAt(0)));
 	const decoder = new TextDecoder('utf-8');
 	return decoder.decode(bytes);
+}
+
+async function ADD(envadd) {
+	var addtext = envadd.replace(/[	 "'|\r\n]+/g, ',').replace(/,+/g, ',');  // 将空格、双引号、单引号和换行符替换为逗号
+	//console.log(addtext);
+	if (addtext.charAt(0) == ',') addtext = addtext.slice(1);
+	if (addtext.charAt(addtext.length -1) == ',') addtext = addtext.slice(0, addtext.length - 1);
+	const add = addtext.split(',');
+	//console.log(add);
+	return add ;
 }
