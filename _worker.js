@@ -12,8 +12,7 @@ let timestamp = 4102329600000;//2099-12-31
 
 //节点链接 + 订阅链接
 let MainData = `
-vless://ba331ad9-83fa-453d-b026-ca54f506e9da@ip.sb:443?encryption=none&security=tls&sni=ygcfw.ezbiz365.cloudns.org&fp=random&type=ws&host=ygcfw.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#ygcfw
-vless://ba331ad9-83fa-453d-b026-ca54f506e9da@www.singapore.com:443?encryption=none&security=tls&sni=ygcfw.ezbiz365.cloudns.org&fp=random&type=ws&host=ygcfw.ezbiz365.cloudns.org&path=%2F%3Fed%3D2048#ygcfw
+vless://f72fe12f-7cdb-4a61-85b7-2f128588f4b0@bpb.ezbiz.dynv6.net:443?encryption=none&security=tls&sni=BpB.eZBiZ.DYnV6.neT&alpn=h2%2Chttp%2F1.1&fp=randomized&type=ws&host=bPb.EZbiz.DyNv6.NeT&path=%2FLJN8BPZscwpU9B8R%3Fed%3D2560#%F0%9F%92%A6%20BPB%20-%20bpb.ezbiz.dynv6.net
 https://sub.xf.free.hr/auto
 https://hy2sub.pages.dev
 `
