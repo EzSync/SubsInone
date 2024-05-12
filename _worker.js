@@ -12,7 +12,8 @@ let timestamp = 4102329600000;//2099-12-31
 
 //节点链接 + 订阅链接
 let MainData = `
-vless://f72fe12f-7cdb-4a61-85b7-2f128588f4b0@bpb.ezbiz.dynv6.net:443?encryption=none&security=tls&sni=BpB.eZBiZ.DYnV6.neT&alpn=h2%2Chttp%2F1.1&fp=randomized&type=ws&host=bPb.EZbiz.DyNv6.NeT&path=%2FLJN8BPZscwpU9B8R%3Fed%3D2560#%F0%9F%92%A6%20BPB%20-%20bpb.ezbiz.dynv6.net
+https://Trojan.fxxk.dedyn.io/auto
+https://VLESS.fxxk.dedyn.io/auto
 https://sub.xf.free.hr/auto
 https://hy2sub.pages.dev
 `
