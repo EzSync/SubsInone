@@ -12,10 +12,9 @@ let timestamp = 4102329600000;//2099-12-31
 
 //节点链接 + 订阅链接
 let MainData = `
-https://Trojan.fxxk.dedyn.io/auto
-https://VLESS.fxxk.dedyn.io/auto
 https://sub.xf.free.hr/auto
 https://hy2sub.pages.dev
+https://WARP.fxxk.dedyn.io/auto
 `
 
 let urls = [];
