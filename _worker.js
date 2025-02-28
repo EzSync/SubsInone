@@ -23,7 +23,7 @@ https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub
 `
 
 let urls = [];
-let subConverter = "SUBAPI.fxxk.dedyn.io"; //在线订阅转换后端，目前使用CM的订阅转换功能。支持自建psub 可自行搭建https://github.com/bulianglin/psub
+let subConverter = "SUBAPI.cmliussss.net"; //在线订阅转换后端，目前使用CM的订阅转换功能。支持自建psub 可自行搭建https://github.com/bulianglin/psub
 let subConfig = "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/config/ACL4SSR_Online_MultiCountry.ini"; //订阅配置文件
 let subProtocol = 'https';
 
@@ -119,7 +119,8 @@ export default {
 			let req_data = MainData;
 
 			let 追加UA = 'v2rayn';
-			if (url.searchParams.has('clash')) 追加UA = 'clash';
+			if (url.searchParams.has('b64') || url.searchParams.has('base64')) 订阅格式 = 'base64';
+			else if (url.searchParams.has('clash')) 追加UA = 'clash';
 			else if (url.searchParams.has('singbox')) 追加UA = 'singbox';
 			else if (url.searchParams.has('surge')) 追加UA = 'surge';
 			else if (url.searchParams.has('quanx')) 追加UA = 'Quantumult%20X';
@@ -167,7 +168,7 @@ export default {
 					return base64.slice(0, base64.length - padding) + '=='.slice(0, padding);
 				}
 
-				base64Data = encodeBase64(result);
+				base64Data = encodeBase64(result.replace(/\u0026/g, '&'))
 			}
 
 			if (订阅格式 == 'base64' || token == fakeToken) {
@@ -379,7 +380,7 @@ async function proxyURL(proxyURL, url) {
 async function getSUB(api, request, 追加UA, userAgentHeader) {
 	if (!api || api.length === 0) {
 		return [];
-	}
+	} else api = [...new Set(api)]; // 去重
 	let newapi = "";
 	let 订阅转换URLs = "";
 	let 异常订阅 = "";
@@ -424,17 +425,21 @@ async function getSUB(api, request, 追加UA, userAgentHeader) {
 			// 检查响应状态是否为'fulfilled'
 			if (response.status === 'fulfilled') {
 				const content = await response.value || 'null'; // 获取响应的内容
-				if (content.includes('proxies') && content.includes('proxy-groups')) {
+				if (content.includes('proxies:')) {
+					//console.log('Clash订阅: ' + response.apiUrl);
 					订阅转换URLs += "|" + response.apiUrl; // Clash 配置
-				} else if (content.includes('outbounds') && content.includes('inbounds')) {
+				} else if (content.includes('outbounds"') && content.includes('inbounds"')) {
+					//console.log('Singbox订阅: ' + response.apiUrl);
 					订阅转换URLs += "|" + response.apiUrl; // Singbox 配置
 				} else if (content.includes('://')) {
+					//console.log('明文订阅: ' + response.apiUrl);
 					newapi += content + '\n'; // 追加内容
 				} else if (isValidBase64(content)) {
+					//console.log('Base64订阅: ' + response.apiUrl);
 					newapi += base64Decode(content) + '\n'; // 解码并追加内容
 				} else {
 					const 异常订阅LINK = `trojan://CMLiussss@127.0.0.1:8888?security=tls&allowInsecure=1&type=tcp&headerType=none#%E5%BC%82%E5%B8%B8%E8%AE%A2%E9%98%85%20${response.apiUrl.split('://')[1].split('/')[0]}`;
-					console.log(异常订阅LINK);
+					console.log('异常订阅: ' + 异常订阅LINK);
 					异常订阅 += `${异常订阅LINK}\n`;
 				}
 			}
@@ -453,14 +458,22 @@ async function getSUB(api, request, 追加UA, userAgentHeader) {
 async function getUrl(request, targetUrl, 追加UA, userAgentHeader) {
 	// 设置自定义 User-Agent
 	const newHeaders = new Headers(request.headers);
-	newHeaders.set("User-Agent", `v2rayN/6.45 cmliu/CF-Workers-SUB ${追加UA}(${userAgentHeader})`);
+	newHeaders.set("User-Agent", `${atob('djJyYXlOLzYuNDU=')} cmliu/CF-Workers-SUB ${追加UA}(${userAgentHeader})`);
 
 	// 构建新的请求对象
 	const modifiedRequest = new Request(targetUrl, {
 		method: request.method,
 		headers: newHeaders,
 		body: request.method === "GET" ? null : request.body,
-		redirect: "follow"
+		redirect: "follow",
+		cf: {
+			// 忽略SSL证书验证
+			insecureSkipVerify: true,
+			// 允许自签名证书
+			allowUntrusted: true,
+			// 禁用证书验证
+			validateCertificate: false
+		}
 	});
 
 	// 输出请求的详细信息
@@ -474,8 +487,10 @@ async function getUrl(request, targetUrl, 追加UA, userAgentHeader) {
 }
 
 function isValidBase64(str) {
+	// 先移除所有空白字符(空格、换行、回车等)
+	const cleanStr = str.replace(/\s/g, '');
 	const base64Regex = /^[A-Za-z0-9+/=]+$/;
-	return base64Regex.test(str);
+	return base64Regex.test(cleanStr);
 }
 
 async function 迁移地址列表(env, txt = 'ADD.txt') {
@@ -589,7 +604,7 @@ async function KV(request, env, txt = 'ADD.txt', guest) {
 					Subscribe / sub 订阅地址, 点击链接自动 <strong>复制订阅链接</strong> 并 <strong>生成订阅二维码</strong> <br>
 					---------------------------------------------------------------<br>
 					自适应订阅地址:<br>
-					<a href="javascript:void(0)" onclick="copyToClipboard('https://${url.hostname}/${mytoken}?b64','qrcode_0')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${url.hostname}/${mytoken}</a><br>
+					<a href="javascript:void(0)" onclick="copyToClipboard('https://${url.hostname}/${mytoken}?sub','qrcode_0')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${url.hostname}/${mytoken}</a><br>
 					<div id="qrcode_0" style="margin: 10px 10px 10px 10px;"></div>
 					Base64订阅地址:<br>
 					<a href="javascript:void(0)" onclick="copyToClipboard('https://${url.hostname}/${mytoken}?b64','qrcode_1')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${url.hostname}/${mytoken}?b64</a><br>
